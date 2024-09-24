@@ -129,6 +129,18 @@ bool AppGui::initialize()
 #endif
 
     showConfigApp = new QAction(tr("&Show Moolticute Application"), this);
+    getScreenshotOTP = new QAction(tr("Grab &OTP QR from the screen"), this);
+
+    connect(getScreenshotOTP, &QAction::triggered, [=]()
+    {
+        QScreen *screen = QGuiApplication::primaryScreen();
+        if (!screen)
+            return;
+
+        QPixmap originalPixmap = screen->grabWindow(0);
+        qDebug() << "screen grabbed\n";
+    });
+
     connect(showConfigApp, &QAction::triggered, [=]()
     {
         if (!win || win->isHidden())
@@ -163,6 +175,7 @@ bool AppGui::initialize()
     systrayMenu->addSeparator();
     systrayMenu->addAction(showConfigApp);
     systrayMenu->addSeparator();
+    systrayMenu->addAction(getScreenshotOTP);
     systrayMenu->addAction(quitAction);
 
     systray->setContextMenu(systrayMenu);

@@ -73,6 +73,7 @@ private:
      QSystemTrayIcon *systray = nullptr;
      WSClient *wsClient = nullptr;
      QAction *showConfigApp = nullptr;
+     QAction *getScreenshotOTP = nullptr;
      DaemonMenuAction *daemonAction = nullptr;
 #ifndef Q_OS_WIN
      QAction *restartDaemonAction = nullptr;
